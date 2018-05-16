@@ -1,0 +1,41 @@
+version: '3'
+services:
+  eureka-server:
+      image: eureka-server:latest
+      container_name: eureka-server
+      build: ./eureka-server
+      network_mode: "host"
+      ports:
+        - "8761:8761"
+      extra_hosts:
+        - "eureka.trennble.com:47.106.125.127"
+      volumes:
+        - /web/logs:/web/logs
+  zuul-server:
+      image: zuul-server:latest
+      container_name: zuul-serverhosts
+      build: ./zuul-server
+      network_mode: "host"
+      ports:
+        - "8765:8765"
+      extra_hosts:
+        - "eureka.trennble.com:47.106.125.127"
+        - "sso.trennble.com:47.106.125.127"
+      volumes:
+        - /web/logs:/web/logs
+  auth-server:
+      image: auth-server:latest
+      container_name: auth-server
+      build: ./auth-server
+      network_mode: "host"
+      ports:
+        - "8767:8767"
+      extra_hosts:
+        - "eureka.trennble.com:47.106.125.127"
+      volumes:
+        - /web/logs:/web/logs
+
+networks:
+  default:
+    external:
+      name: invoice_nw

@@ -1,0 +1,78 @@
+spring:
+  application:
+    name: zuul
+  redis:
+    host: 47.106.125.127
+    password: xiaoshanredis
+
+server:
+  port: 8765
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    status-page-url: http://${eureka.instance.hostname}:${server.port}/routes
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.trennble.com:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+zuul:
+  prefix: /api
+  routes:
+    static:
+      path: /static/**
+  sensitive-headers:
+  add-proxy-headers: true
+  host:
+      connect-timeout-millis: 10000
+      socket-timeout-millis: 60000
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      accessTokenUri: http://sso.trennble.com:8767/oauth/token #请求令牌地址
+      userAuthorizationUri: http://sso.trennble.com:8767/oauth/authorize #需要认证时候跳转的地址
+      clientId: acme
+      clientSecret: acmesecret
+    authorization:
+      check-token-access: http://sso.trennble.com:8767/oauth/check_token #验证token
+    resource:
+#          jwt:
+#            keyValue: |
+#              -----BEGIN PUBLIC KEY-----
+#              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtSmC2VqwbZXu8kaUVjWh
+#              Qq4NRDUdA4+o3OoGYQTKmZipzzFs5GrtgTAked5cjkxLp2jhE/ofDRKCLkXaMV5s
+#              SxTxV42p81Ua/FQahMQ+qX7fqMPCgMAlfAa0ZghljzUn+Ybby/EKjTHBs35fIZsu
+#              +wPNvYH1IlnkcE1FgRQHkZnPuZoPMLDORjf4m8bjlvBCrOuaPqD3rpoYgomwRspX
+#              kF0ZZHzFP9zhvgtvBdLGGWD2HgZ0DeISU9oX8yHYNzKP23oN4oAOuIAY0lqmDBLE
+#              oyKsC2BJ2VBkFgJWZrQ9WPShevtkOw0LkEbxumqEayX+Lt2+Y3VR2r/2qrUEkfaS
+#              oQIDAQAB
+#              -----END PUBLIC KEY-----
+#            key-uri: http://sso.trennble.com:8767/oauth/token_key #解析
+          id: openid
+          serviceId: ${PREFIX:}resource
+          user-info-uri: http://sso.trennble.com:8767/user
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+logging:
+  level:
+    org.springframework.security: DEBUG

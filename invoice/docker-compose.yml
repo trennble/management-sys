@@ -1,0 +1,18 @@
+version: '3'
+services:
+  invoice-server:
+      image: invoice-server:latest
+      container_name: invoice-server
+      build: .
+      network_mode: "host"
+      ports:
+        - "8763:8763"
+      extra_hosts:
+        - "eureka.trennble.com:47.106.125.127"
+      volumes:
+        - /web/logs:/web/logs
+
+networks:
+  default:
+    external:
+      name: invoice_nw

@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: sys
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://47.106.125.127:3306/invoice?characterEncoding=utf8
+    username: root
+    password: xiaoshan
+  redis:
+    host: 47.106.125.127
+    password: xiaoshanredis
+
+server:
+  port: 8769
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    status-page-url: http://eureka.trennble.com:${server.port}/swagger-ui.html
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://eureka.trennble.com:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://sso.trennble.com:8767/oauth/token #请求令牌地址
+      userAuthorizationUri: http://sso.trennble.com:8767/oauth/authorize #需要认证时候跳转的地址
+      clientId: acme
+      clientSecret: acmesecret
+    resource:
+          jwt:
+            keyValue: |
+              -----BEGIN PUBLIC KEY-----
+              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtSmC2VqwbZXu8kaUVjWh
+              Qq4NRDUdA4+o3OoGYQTKmZipzzFs5GrtgTAked5cjkxLp2jhE/ofDRKCLkXaMV5s
+              SxTxV42p81Ua/FQahMQ+qX7fqMPCgMAlfAa0ZghljzUn+Ybby/EKjTHBs35fIZsu
+              +wPNvYH1IlnkcE1FgRQHkZnPuZoPMLDORjf4m8bjlvBCrOuaPqD3rpoYgomwRspX
+              kF0ZZHzFP9zhvgtvBdLGGWD2HgZ0DeISU9oX8yHYNzKP23oN4oAOuIAY0lqmDBLE
+              oyKsC2BJ2VBkFgJWZrQ9WPShevtkOw0LkEbxumqEayX+Lt2+Y3VR2r/2qrUEkfaS
+              oQIDAQAB
+              -----END PUBLIC KEY-----
+            key-uri: http://sso.trennble.com:8767/oauth/token_key #解析
+          id: openid
+          serviceId: ${PREFIX:}resource
