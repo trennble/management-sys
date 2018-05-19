@@ -4,17 +4,17 @@ spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://47.106.125.127:3306/invoice?characterEncoding=utf8
+    url: jdbc:mysql://mysql.trennble.com:3306/invoice?characterEncoding=utf8
     username: root
     password: xiaoshan
   jpa:
     generate-ddl: true
-#    show-sql: true
+    show-sql: true
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
   redis:
-    host: 47.106.125.127
+    host: mysql.trennble.com
     password: xiaoshanredis
 
 server:
@@ -45,6 +45,7 @@ security:
       scope: read
     authorization:
       check-token-access: isAuthenticated()
+
 
 logging:
   level:

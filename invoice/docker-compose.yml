@@ -8,7 +8,8 @@ services:
       ports:
         - "8763:8763"
       extra_hosts:
-        - "eureka.trennble.com:47.106.125.127"
+        - "eureka.trennble.com:trennblexxx"
+        - "mysql.trennble.com:trennblexxx"
       volumes:
         - /web/logs:/web/logs
 

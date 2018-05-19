@@ -2,7 +2,7 @@ spring:
   application:
     name: zuul
   redis:
-    host: 47.106.125.127
+    host: mysql.trennble.com
     password: xiaoshanredis
 
 server:

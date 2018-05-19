@@ -4,7 +4,7 @@ spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://47.106.125.127:3306/invoice?characterEncoding=utf8
+    url: jdbc:mysql://mysql.trennble.com:3306/invoice?characterEncoding=utf8
     username: root
     password: xiaoshan
   jpa:
@@ -13,8 +13,9 @@ spring:
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+    default-property-inclusion: non_null
   redis:
-    host: 47.106.125.127
+    host: mysql.trennble.com
     password: xiaoshanredis
 
 server:
@@ -29,8 +30,6 @@ feign:
         connectTimeout: 5000
         readTimeout: 5000
         loggerLevel: full
-#        requestInterceptors:
-#        - com.iwellmass.auth.config.OAuth2FeignRequestInterceptor
         decode404: false
 #security:
 #  oauth2:
@@ -46,6 +45,7 @@ feign:
 
 #spring:
 #  profiles: default
+
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
@@ -59,3 +59,6 @@ eureka:
       enabled: true
     lease:
       duration: 5
+logging:
+  level:
+    org.springframework.security: DEBUG
