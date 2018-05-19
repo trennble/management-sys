@@ -1,17 +1,18 @@
 package com.trennble.invoice.service;
 
-import com.trennble.invoice.entity.Menu;
+import com.trennble.auth.entity.User;
 import com.trennble.invoice.util.PageData;
 
-public interface MenuService {
+public interface UserService {
 
-    Menu save(Menu menu);
+    User save(User user);
 
     void delete(Integer id);
 
-    Menu update(Menu menu);
+    User update(User user);
 
-    Menu fetch(Integer id);
+    User fetch(Integer id);
 
     PageData list(int page, int limit);
+
 }

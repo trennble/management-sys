@@ -15,15 +15,15 @@ import java.util.List;
 public class Role implements Serializable{
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     private String name;
 
     // @ManyToMany
     // private List<Menu> menus;
 
-    @ManyToMany
-    private List<User> users;
+    // @ManyToMany
+    // private List<User> users;
 
     private String creator;
 
@@ -32,14 +32,6 @@ public class Role implements Serializable{
     private LocalDateTime updateDate;
 
     private LocalDateTime createDate;
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 
     public String getCreator() {
         return creator;
@@ -73,11 +65,11 @@ public class Role implements Serializable{
         this.createDate = createDate;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

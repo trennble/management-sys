@@ -1,17 +1,18 @@
 package com.trennble.invoice.service;
 
-import com.trennble.invoice.entity.Menu;
+import com.trennble.auth.entity.Role;
 import com.trennble.invoice.util.PageData;
 
-public interface MenuService {
+public interface RoleService {
 
-    Menu save(Menu menu);
+    Role save(Role role);
 
     void delete(Integer id);
 
-    Menu update(Menu menu);
+    Role update(Role role);
 
-    Menu fetch(Integer id);
+    Role fetch(Integer id);
 
     PageData list(int page, int limit);
+
 }

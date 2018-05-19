@@ -1,7 +1,7 @@
 package com.trennble.invoice.controller;
 
-import com.trennble.invoice.entity.Menu;
-import com.trennble.invoice.service.MenuService;
+import com.trennble.auth.entity.User;
+import com.trennble.invoice.service.UserService;
 import com.trennble.invoice.util.PageData;
 import com.trennble.invoice.util.ServiceResult;
 import org.springframework.web.bind.annotation.*;
@@ -9,36 +9,37 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("menu")
-public class MenuController {
+@RequestMapping("user")
+public class UserController {
 
     @Inject
-    private MenuService menuService;
+    private UserService userService;
 
     @PostMapping
-    public ServiceResult save(Menu menu) {
-        return ServiceResult.success(menuService.save(menu));
+    public ServiceResult save(User user) {
+        return ServiceResult.success(userService.save(user));
     }
 
     @DeleteMapping
     public ServiceResult delete(Integer id) {
-        menuService.delete(id);
+        userService.delete(id);
         return ServiceResult.success("true");
     }
 
     @PutMapping
-    public ServiceResult update(Menu menu) {
-        return ServiceResult.success(menuService.update(menu));
+    public ServiceResult update(User user) {
+        return ServiceResult.success(userService.update(user));
     }
 
     @GetMapping
     public ServiceResult fetch(Integer id) {
-        return ServiceResult.success(menuService.fetch(id));
+        return ServiceResult.success(userService.fetch(id));
     }
 
     @GetMapping("list")
     public ServiceResult list(int page, int limit) {
-        PageData pageRes = menuService.list(page, limit);
+        PageData pageRes = userService.list(page, limit);
         return ServiceResult.success(pageRes);
     }
+
 }

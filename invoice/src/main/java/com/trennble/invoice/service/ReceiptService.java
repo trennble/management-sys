@@ -1,8 +1,7 @@
 package com.trennble.invoice.service;
 
 import com.trennble.invoice.entity.Receipt;
-
-import java.util.List;
+import com.trennble.invoice.util.PageData;
 
 public interface ReceiptService {
 
@@ -10,7 +9,9 @@ public interface ReceiptService {
 
     Receipt update(Receipt receipt);
 
-    List<Receipt> list(int page, int limit);
+    Receipt fetch(int id);
+
+    PageData<Receipt> list(int page, int limit);
 
     void delete(Integer id);
 }
