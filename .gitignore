@@ -24,3 +24,6 @@ hs_err_pid*
 .classpath
 .settings/
 logs/
+
+#ip info
+docker-compose.yml
