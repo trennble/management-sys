@@ -8,19 +8,20 @@ services:
       ports:
         - "8761:8761"
       extra_hosts:
-        - "eureka.trennble.com:47.106.125.127"
+        - "eureka.trennble.com:trennblexxx"
       volumes:
         - /web/logs:/web/logs
   zuul-server:
       image: zuul-server:latest
-      container_name: zuul-serverhosts
+      container_name: zuul-server
       build: ./zuul-server
       network_mode: "host"
       ports:
         - "8765:8765"
       extra_hosts:
-        - "eureka.trennble.com:47.106.125.127"
-        - "sso.trennble.com:47.106.125.127"
+        - "eureka.trennble.com:trennblexxx"
+        - "sso.trennble.com:trennblexxx"
+        - "mysql.trennble.com:trennblexxx"
       volumes:
         - /web/logs:/web/logs
   auth-server:
@@ -31,7 +32,8 @@ services:
       ports:
         - "8767:8767"
       extra_hosts:
-        - "eureka.trennble.com:47.106.125.127"
+        - "eureka.trennble.com:trennblexxx"
+        - "mysql.trennble.com:trennblexxx"
       volumes:
         - /web/logs:/web/logs
 
