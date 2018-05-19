@@ -1,6 +1,5 @@
-package com.trennble.auth;
+package com.trennble.auth.config;
 
-import com.trennble.auth.config.CustomUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -10,34 +9,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.csrf.CsrfFilter;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * 自定义用户登陆逻辑配置
- *
  */
 // @Configuration
-@EnableAuthorizationServer
+// @EnableAuthorizationServer
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final AuthenticationManager authenticationManager;
 
     private Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
-
-    @Inject
-    public WebSecurityConfig(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
 
     @Bean
     UserDetailsService customUserService() {
@@ -51,10 +36,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable().authorizeRequests()
+                .and().authorizeRequests().antMatchers("/user").permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").failureUrl("/login?error").permitAll()
                 .and().logout().permitAll();
+
         // http.exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
         //
         //     logger.info("Pre-authenticated entry point called. Rejecting access");

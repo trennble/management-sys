@@ -1,4 +1,4 @@
-package com.trennble.auth;
+package com.trennble.auth.config;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;

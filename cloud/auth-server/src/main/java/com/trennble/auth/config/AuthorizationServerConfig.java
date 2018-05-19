@@ -1,4 +1,4 @@
-package com.trennble.auth;
+package com.trennble.auth.config;
 
 import com.google.common.collect.Sets;
 import com.trennble.auth.config.CustomTokenEnhancer;
@@ -60,7 +60,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     // public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     //     endpoints.tokenStore(jwtTokenStore())
     //             .accessTokenConverter(jwtAccessTokenConverter())
-    //             .authenticationManager(authenticationManager);
+    //             .authenticationManager();
     // }
     //
     // @Bean

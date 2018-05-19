@@ -23,7 +23,7 @@ public class CustomUserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }
-        user.getRoles().forEach(item->item.setUsers(null));
+        // user.getRoles().forEach(item->item.setUsers(null));
         System.out.println("username:"+user.getUsername()+";password:"+user.getPassword());
         // SysUserDetail sysUserDetail=new SysUserDetail();
         // sysUserDetail.setUser(user);
