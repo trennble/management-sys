@@ -13,7 +13,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableZuulProxy
 // @EnableOAuth2Sso
 // @EnableRedisHttpSession
-@EnableResourceServer
+// @EnableResourceServer
 @SpringCloudApplication
 public class ZuulServerApplication {
 
