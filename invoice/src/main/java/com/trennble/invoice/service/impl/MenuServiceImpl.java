@@ -89,12 +89,14 @@ public class MenuServiceImpl implements MenuService {
                 subMap.put("title",subMenu.getTitle());
                 subMap.put("expand",false);
                 subMap.put("remark",subMenu.getRemark());
+                subMap.put("id",subMenu.getId());
                 subList.add(subMap);
             });
             menuMap.put("children",subList);
             menuMap.put("title",menu.getTitle());
             menuMap.put("expand",false);
             menuMap.put("remark",menu.getRemark());
+            menuMap.put("id",menu.getId());
             resList.add(menuMap);
         });
         return resList;
