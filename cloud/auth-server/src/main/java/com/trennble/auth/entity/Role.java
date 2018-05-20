@@ -19,7 +19,7 @@ public class Role implements Serializable{
 
     private String name;
 
-
+    private String remark;
     // @ManyToMany
     // private List<User> users;
 
