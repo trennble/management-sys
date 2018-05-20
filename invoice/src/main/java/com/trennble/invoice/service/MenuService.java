@@ -3,6 +3,9 @@ package com.trennble.invoice.service;
 import com.trennble.invoice.entity.Menu;
 import com.trennble.invoice.util.PageData;
 
+import java.util.List;
+import java.util.Map;
+
 public interface MenuService {
 
     Menu save(Menu menu);
@@ -14,4 +17,6 @@ public interface MenuService {
     Menu fetch(Integer id);
 
     PageData list(int page, int limit);
+
+    List<Map<String, Object>> menuRole();
 }

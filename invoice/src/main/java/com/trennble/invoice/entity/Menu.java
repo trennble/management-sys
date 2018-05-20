@@ -1,9 +1,10 @@
 package com.trennble.invoice.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.trennble.auth.entity.Role;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "sys_menu")
 public class Menu {
@@ -12,11 +13,17 @@ public class Menu {
     @GeneratedValue
     private Integer id;
 
+    private Integer pid;
+
     private String name;
 
     private String remark;
 
-    private String url;
+    private String path;
+
+    private String title;
+
+    private String icon;
 
     private String creator;
 
@@ -25,6 +32,13 @@ public class Menu {
     private LocalDateTime updateDate;
 
     private LocalDateTime createDate;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "pid",referencedColumnName = "id")
+    private List<Menu> children;
 
     public Integer getId() {
         return id;
@@ -48,14 +62,6 @@ public class Menu {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public String getCreator() {
@@ -88,5 +94,53 @@ public class Menu {
 
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
+    }
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
     }
 }

@@ -41,4 +41,9 @@ public class MenuController {
         PageData pageRes = menuService.list(page, limit);
         return ServiceResult.success(pageRes);
     }
+
+    @GetMapping("menuRole")
+    public ServiceResult menuRole(){
+        return ServiceResult.success(menuService.menuRole());
+    }
 }

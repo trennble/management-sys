@@ -19,8 +19,6 @@ public class Role implements Serializable{
 
     private String name;
 
-    // @ManyToMany
-    // private List<Menu> menus;
 
     // @ManyToMany
     // private List<User> users;
