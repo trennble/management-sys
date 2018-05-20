@@ -44,6 +44,7 @@ public class InvoiceController {
     @DeleteMapping
     @ApiOperation("删除发票")
     ServiceResult<String> delete(Integer id){
+        invoiceService.delete(id);
         return ServiceResult.success("success");
     }
 }

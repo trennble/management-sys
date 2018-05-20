@@ -18,32 +18,33 @@ public class ReceiptController {
 
 
     @PostMapping
-    @ApiOperation("增加发票")
+    @ApiOperation("增加报销单")
     ServiceResult<Receipt> add(@RequestBody Receipt receipt){
         return ServiceResult.success(receiptService.add(receipt));
     }
 
     @PutMapping
-    @ApiOperation("更新发票")
+    @ApiOperation("更新报销单")
     ServiceResult<Receipt> update(@RequestBody Receipt receipt){
         return ServiceResult.success(receiptService.update(receipt));
     }
 
     @GetMapping
-    @ApiOperation("获取发票详情")
+    @ApiOperation("获取报销单详情")
     ServiceResult<Receipt> list(int id){
         return ServiceResult.success(receiptService.fetch(id));
     }
 
     @GetMapping("list")
-    @ApiOperation("获取发票列表")
+    @ApiOperation("获取报销单列表")
     ServiceResult<PageData<Receipt>> list(int page, int limit){
         return ServiceResult.success(receiptService.list(page,limit));
     }
 
     @DeleteMapping
-    @ApiOperation("删除发票")
+    @ApiOperation("删除报销单")
     ServiceResult delete(Integer id){
+        receiptService.delete(id);
         return ServiceResult.success(true);
     }
 
