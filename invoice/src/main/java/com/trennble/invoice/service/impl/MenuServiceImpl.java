@@ -75,4 +75,28 @@ public class MenuServiceImpl implements MenuService {
         return res;
 
     }
+
+    @Override
+    public List<Map<String, Object>> menuTree() {
+        List<Menu> firstMenus = menuRepo.findByPidIsNull();
+        List<Map<String,Object>> resList=Lists.newArrayList();
+        firstMenus.forEach(menu->{
+            List<Menu> subMenus = menu.getChildren();
+            Map<String,Object> menuMap=Maps.newHashMap();
+            List<Map<String,Object>> subList=Lists.newArrayList();
+            subMenus.forEach(subMenu->{
+                Map<String,Object> subMap=Maps.newHashMap();
+                subMap.put("title",subMenu.getTitle());
+                subMap.put("expand",false);
+                subMap.put("remark",subMenu.getRemark());
+                subList.add(subMap);
+            });
+            menuMap.put("children",subList);
+            menuMap.put("title",menu.getTitle());
+            menuMap.put("expand",false);
+            menuMap.put("remark",menu.getRemark());
+            resList.add(menuMap);
+        });
+        return resList;
+    }
 }

@@ -46,4 +46,9 @@ public class MenuController {
     public ServiceResult menuRole(){
         return ServiceResult.success(menuService.menuRole());
     }
+
+    @GetMapping("menuTree")
+    public ServiceResult menuTree(){
+        return ServiceResult.success(menuService.menuTree());
+    }
 }

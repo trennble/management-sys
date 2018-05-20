@@ -19,4 +19,6 @@ public interface MenuService {
     PageData list(int page, int limit);
 
     List<Map<String, Object>> menuRole();
+
+    List<Map<String,Object>> menuTree();
 }

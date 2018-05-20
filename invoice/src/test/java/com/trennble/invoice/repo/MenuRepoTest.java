@@ -30,4 +30,11 @@ public class MenuRepoTest {
 
         System.out.println((new ObjectMapper()).writeValueAsString(res));
     }
+
+    @Test
+    public void menuTree() throws JsonProcessingException {
+
+        List<Map<String, Object>> res = menuService.menuTree();
+        System.out.println((new ObjectMapper()).writeValueAsString(res));
+    }
 }
