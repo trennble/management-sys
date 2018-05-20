@@ -2,6 +2,7 @@ package com.trennble.invoice.repo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trennble.auth.entity.Role;
 import com.trennble.invoice.InvoiceApplication;
 import com.trennble.invoice.service.MenuService;
 import org.junit.Test;
@@ -35,6 +36,13 @@ public class MenuRepoTest {
     public void menuTree() throws JsonProcessingException {
 
         List<Map<String, Object>> res = menuService.menuTree();
+        System.out.println((new ObjectMapper()).writeValueAsString(res));
+    }
+
+    @Test
+    public void findRoles() throws JsonProcessingException {
+
+        List<Role> res = menuService.findRoles(1);
         System.out.println((new ObjectMapper()).writeValueAsString(res));
     }
 }

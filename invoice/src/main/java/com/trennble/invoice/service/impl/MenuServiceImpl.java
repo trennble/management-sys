@@ -99,4 +99,9 @@ public class MenuServiceImpl implements MenuService {
         });
         return resList;
     }
+
+    @Override
+    public List<Role> findRoles(Integer menuId) {
+        return menuRepo.findOne(menuId).getRoles();
+    }
 }

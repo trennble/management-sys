@@ -1,5 +1,6 @@
 package com.trennble.invoice.service;
 
+import com.trennble.auth.entity.Role;
 import com.trennble.invoice.entity.Menu;
 import com.trennble.invoice.util.PageData;
 
@@ -21,4 +22,6 @@ public interface MenuService {
     List<Map<String, Object>> menuRole();
 
     List<Map<String,Object>> menuTree();
+
+    List<Role> findRoles(Integer menuId);
 }
