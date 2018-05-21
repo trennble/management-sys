@@ -58,7 +58,7 @@ public class RoleController {
         return ServiceResult.success(roleService.findUsers(roleId));
     }
 
-    @PutMapping("roles")
+    @PutMapping("users")
     @ApiOperation("为当前角色设置用户")
     public ServiceResult setRoleUser(Integer roleId,@RequestBody List<Integer> userIds){
         roleService.setRoleUser(roleId,userIds);
