@@ -4,6 +4,7 @@ import com.trennble.auth.entity.Role;
 import com.trennble.invoice.service.RoleService;
 import com.trennble.invoice.util.PageData;
 import com.trennble.invoice.util.ServiceResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -49,6 +50,19 @@ public class RoleController {
     public ServiceResult all() {
         List<Role> roles = roleService.all();
         return ServiceResult.success(roles);
+    }
+
+    @GetMapping("users")
+    @ApiOperation("获取当前角色的用户")
+    public ServiceResult findUsers(Integer roleId){
+        return ServiceResult.success(roleService.findUsers(roleId));
+    }
+
+    @PutMapping("roles")
+    @ApiOperation("为当前角色设置用户")
+    public ServiceResult setRoleUser(Integer roleId,@RequestBody List<Integer> userIds){
+        roleService.setRoleUser(roleId,userIds);
+        return ServiceResult.success(true);
     }
 
 }

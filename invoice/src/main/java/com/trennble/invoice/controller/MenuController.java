@@ -57,7 +57,7 @@ public class MenuController {
     }
 
     @GetMapping("roles")
-    @ApiOperation("获取当前菜单角色")
+    @ApiOperation("获取当前菜单的角色")
     public ServiceResult findRoles(Integer menuId){
         return ServiceResult.success(menuService.findRoles(menuId));
     }
