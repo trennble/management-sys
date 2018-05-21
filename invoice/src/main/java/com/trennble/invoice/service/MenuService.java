@@ -24,4 +24,6 @@ public interface MenuService {
     List<Map<String,Object>> menuTree();
 
     List<Role> findRoles(Integer menuId);
+
+    void setMenuRole(Integer menuId,List<Integer> roleIds);
 }

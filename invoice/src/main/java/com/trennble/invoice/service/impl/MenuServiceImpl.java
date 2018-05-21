@@ -9,9 +9,15 @@ import com.trennble.invoice.service.MenuService;
 import com.trennble.invoice.util.PageData;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +28,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Inject
     private MenuRepo menuRepo;
+
+    @Inject
+    private JdbcTemplate template;
 
     @Override
     public Menu save(Menu menu) {
@@ -105,5 +114,25 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public List<Role> findRoles(Integer menuId) {
         return menuRepo.findOne(menuId).getRoles();
+    }
+
+    @Override
+    @Transactional
+    public void setMenuRole(Integer menuId, List<Integer> roleIds) {
+
+        // 删除所有的权限
+        String deleteSql="delete from sys_menu_roles where sys_menu_id=?";
+        template.update(deleteSql,menuId);
+
+        // 设置新的权限
+        String sql="insert INTO sys_menu_roles(roles_id, sys_menu_id) VALUES (?,?)";
+        List<Object[]> args=Lists.newArrayList();
+        for (Integer id:roleIds){
+            Integer[] arg=new Integer[2];
+            arg[0]=id;
+            arg[1]=menuId;
+            args.add(arg);
+        }
+        template.batchUpdate(sql,args);
     }
 }

@@ -78,4 +78,12 @@ public class Role implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

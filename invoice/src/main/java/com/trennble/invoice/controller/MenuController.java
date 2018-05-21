@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("menu")
@@ -59,6 +60,13 @@ public class MenuController {
     @ApiOperation("获取当前菜单角色")
     public ServiceResult findRoles(Integer menuId){
         return ServiceResult.success(menuService.findRoles(menuId));
+    }
+
+    @PutMapping("roles")
+    @ApiOperation("为当前菜单设置角色")
+    public ServiceResult setMenuRoles(Integer menuId, List<Integer> roleIds){
+        menuService.setMenuRole(menuId,roleIds);
+        return ServiceResult.success(true);
     }
 
 

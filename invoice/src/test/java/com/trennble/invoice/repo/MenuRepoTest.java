@@ -2,6 +2,7 @@ package com.trennble.invoice.repo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import com.trennble.auth.entity.Role;
 import com.trennble.invoice.InvoiceApplication;
 import com.trennble.invoice.service.MenuService;
@@ -44,5 +45,14 @@ public class MenuRepoTest {
 
         List<Role> res = menuService.findRoles(1);
         System.out.println((new ObjectMapper()).writeValueAsString(res));
+    }
+
+    @Test
+    public void setMenuRole(){
+
+        Integer menuId=14;
+        List<Integer> roleIds= Lists.newArrayList(1);
+        menuService.setMenuRole(menuId,roleIds);
+
     }
 }

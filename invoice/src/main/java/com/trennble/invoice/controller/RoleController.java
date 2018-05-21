@@ -7,6 +7,7 @@ import com.trennble.invoice.util.ServiceResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("role")
@@ -40,6 +41,12 @@ public class RoleController {
     public ServiceResult list(int page, int limit) {
         PageData pageRes = roleService.list(page, limit);
         return ServiceResult.success(pageRes);
+    }
+
+    @GetMapping("all")
+    public ServiceResult all() {
+        List<Role> roles = roleService.all();
+        return ServiceResult.success(roles);
     }
 
 }
