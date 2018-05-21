@@ -64,7 +64,7 @@ public class MenuController {
 
     @PutMapping("roles")
     @ApiOperation("为当前菜单设置角色")
-    public ServiceResult setMenuRoles(Integer menuId, List<Integer> roleIds){
+    public ServiceResult setMenuRoles(Integer menuId,@RequestBody List<Integer> roleIds){
         menuService.setMenuRole(menuId,roleIds);
         return ServiceResult.success(true);
     }

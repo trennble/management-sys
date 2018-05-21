@@ -23,8 +23,10 @@ public class RoleController {
 
     @DeleteMapping
     public ServiceResult delete(Integer id) {
-        roleService.delete(id);
-        return ServiceResult.success("true");
+        if (roleService.delete(id))
+            return ServiceResult.success("delete success");
+        else
+            return ServiceResult.fail("该角色存在用户，不能删除");
     }
 
     @PutMapping
