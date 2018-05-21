@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findByIds(List<Integer> ids) {
         return  Lists.newArrayList(userRepo.findAll(ids));
     }
+
+    @Override
+    public List<User> all() {
+        return Lists.newArrayList(userRepo.findAll());
+    }
 }
