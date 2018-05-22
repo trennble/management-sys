@@ -18,9 +18,45 @@ public class ServiceResult<T> {
     public ServiceResult() {
     }
 
+
+    public ServiceResult(int state) {
+        this.state = state;
+        if (state == 0) {
+            this.success = true;
+        } else {
+            this.success = false;
+        }
+    }
+
+
+    public ServiceResult (boolean success) {
+        this.success = success;
+        if (success) {
+            this.state = 0;
+        } else {
+            this.state = 1;
+        }
+    }
+
     public ServiceResult(T result, int state) {
         this.result = result;
         this.state = state;
+        if (state == 0) {
+            this.success = true;
+        } else {
+            this.success = false;
+        }
+    }
+
+
+    public ServiceResult(T result, boolean success) {
+        this.result = result;
+        this.success = success;
+        if (success) {
+            this.state = 0;
+        } else {
+            this.state = 1;
+        }
     }
 
 

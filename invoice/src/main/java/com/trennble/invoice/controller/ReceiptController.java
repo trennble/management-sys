@@ -19,51 +19,54 @@ public class ReceiptController {
 
     @PostMapping
     @ApiOperation("增加报销单")
-    ServiceResult<Receipt> add(@RequestBody Receipt receipt){
+    ServiceResult<Receipt> add(@RequestBody Receipt receipt) {
         return ServiceResult.success(receiptService.add(receipt));
     }
 
     @PutMapping
     @ApiOperation("更新报销单")
-    ServiceResult<Receipt> update(@RequestBody Receipt receipt){
+    ServiceResult<Receipt> update(@RequestBody Receipt receipt) {
         return ServiceResult.success(receiptService.update(receipt));
     }
 
     @GetMapping
     @ApiOperation("获取报销单详情")
-    ServiceResult<Receipt> list(int id){
+    ServiceResult<Receipt> list(int id) {
         return ServiceResult.success(receiptService.fetch(id));
     }
 
     @GetMapping("list")
     @ApiOperation("获取报销单列表")
-    ServiceResult<PageData<Receipt>> list(int page, int limit){
-        return ServiceResult.success(receiptService.list(page,limit));
+    ServiceResult<PageData<Receipt>> list(int page, int limit, Receipt.Status status) {
+        return ServiceResult.success(receiptService.list(page, limit, status));
     }
 
     @DeleteMapping
     @ApiOperation("删除报销单")
-    ServiceResult delete(Integer id){
+    ServiceResult delete(Integer id) {
         receiptService.delete(id);
         return ServiceResult.success(true);
     }
+
     @PutMapping("commit")
     @ApiOperation("删除报销单")
-    ServiceResult commit(Integer id){
-        receiptService.commit(id);
-        return ServiceResult.success(true);
+    ServiceResult commit(Integer id) {
+        boolean state = receiptService.commit(id);
+        return new ServiceResult(state);
     }
+
     @DeleteMapping("success")
     @ApiOperation("删除报销单")
-    ServiceResult success(Integer id){
-        receiptService.success(id);
-        return ServiceResult.success(true);
+    ServiceResult success(Integer id) {
+        boolean state = receiptService.success(id);
+        return new ServiceResult(state);
     }
+
     @DeleteMapping("fail")
     @ApiOperation("删除报销单")
-    ServiceResult fail(Integer id){
-        receiptService.fail(id);
-        return ServiceResult.success(true);
+    ServiceResult fail(Integer id) {
+        boolean state = receiptService.fail(id);
+        return new ServiceResult(state);
     }
 
 }
