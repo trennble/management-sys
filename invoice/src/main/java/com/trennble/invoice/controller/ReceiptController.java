@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @RestController
 @RequestMapping("receipt")
@@ -20,6 +21,7 @@ public class ReceiptController {
     @PostMapping
     @ApiOperation("增加报销单")
     ServiceResult<Receipt> add(@RequestBody Receipt receipt) {
+        // receipt.set
         return ServiceResult.success(receiptService.add(receipt));
     }
 
@@ -49,24 +51,28 @@ public class ReceiptController {
     }
 
     @PutMapping("commit")
-    @ApiOperation("删除报销单")
-    ServiceResult commit(Integer id) {
-        boolean state = receiptService.commit(id);
+    @ApiOperation("提交报销单")
+    ServiceResult commit(@RequestBody List<Integer> ids) {
+        boolean state = receiptService.commit(ids);
         return new ServiceResult(state);
     }
 
-    @DeleteMapping("success")
-    @ApiOperation("删除报销单")
-    ServiceResult success(Integer id) {
-        boolean state = receiptService.success(id);
+    @PutMapping("success")
+    @ApiOperation("审核通过")
+    ServiceResult success(@RequestBody List<Integer> ids) {
+        boolean state = receiptService.success(ids);
         return new ServiceResult(state);
     }
 
-    @DeleteMapping("fail")
-    @ApiOperation("删除报销单")
-    ServiceResult fail(Integer id) {
-        boolean state = receiptService.fail(id);
+    @PutMapping("fail")
+    @ApiOperation("打回报销单")
+    ServiceResult fail(@RequestBody List<Integer> ids) {
+        boolean state = receiptService.fail(ids);
         return new ServiceResult(state);
     }
+
+    // ServiceResult verifyList(int page,int limit){
+    //
+    // }
 
 }

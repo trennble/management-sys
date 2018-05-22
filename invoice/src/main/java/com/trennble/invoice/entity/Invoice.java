@@ -1,6 +1,5 @@
 package com.trennble.invoice.entity;
 
-import com.trennble.auth.entity.User;
 import com.trennble.invoice.vo.InvoiceVo;
 import io.swagger.annotations.ApiModelProperty;
 

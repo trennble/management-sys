@@ -12,8 +12,8 @@ import java.util.List;
 public class Receipt {
 
 
-    public enum Status{
-        created,commit,success,fail
+    public enum Status {
+        created, commit, success, fail
     }
 
     @Id
@@ -28,13 +28,17 @@ public class Receipt {
 
     private String remark;
 
-    @Column(name="owner_id")
+    @Column(name = "owner_id")
     private Integer userId;
+
+    @Column(name = "user_name")
+    private String userName;
 
     // @ManyToOne
     // private User owner;
 
-    @OneToMany
+    @OneToMany(targetEntity = Invoice.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "recp_id", referencedColumnName = "id")
     private List<Invoice> invoices;
 
     private LocalDateTime updateDate;
@@ -47,6 +51,14 @@ public class Receipt {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Integer getId() {

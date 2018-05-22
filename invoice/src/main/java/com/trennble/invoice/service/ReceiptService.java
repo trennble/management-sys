@@ -3,6 +3,8 @@ package com.trennble.invoice.service;
 import com.trennble.invoice.entity.Receipt;
 import com.trennble.invoice.util.PageData;
 
+import java.util.List;
+
 public interface ReceiptService {
 
     Receipt add(Receipt receipt);
@@ -15,10 +17,10 @@ public interface ReceiptService {
 
     void delete(Integer id);
 
-    boolean fail(Integer id);
+    boolean fail(List<Integer> ids);
 
-    boolean success(Integer id);
+    boolean success(List<Integer> ids);
 
-    boolean commit(Integer id);
+    boolean commit(List<Integer> ids);
 
 }
