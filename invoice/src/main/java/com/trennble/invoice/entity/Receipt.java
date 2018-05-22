@@ -31,8 +31,8 @@ public class Receipt {
     @Column(name="owner_id")
     private Integer userId;
 
-    @ManyToOne
-    private User owner;
+    // @ManyToOne
+    // private User owner;
 
     @OneToMany
     private List<Invoice> invoices;
@@ -71,14 +71,6 @@ public class Receipt {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
     public LocalDateTime getUpdateDate() {

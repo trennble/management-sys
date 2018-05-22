@@ -23,12 +23,12 @@ public class Invoice {
     @ApiModelProperty(hidden = true)
     @Enumerated(EnumType.STRING)
     private Status status;
-    @ManyToOne
-    @ApiModelProperty(hidden = true)
-    private User owner;
-    @ManyToOne
-    @ApiModelProperty(hidden = true)
-    private Receipt recp;
+    // @ManyToOne
+    // @ApiModelProperty(hidden = true)
+    // private User owner;
+    // @ManyToOne
+    // @ApiModelProperty(hidden = true)
+    // private Receipt recp;
     @ApiModelProperty(hidden = true)
     private LocalDateTime updateDate;
     @ApiModelProperty(hidden = true)
@@ -112,22 +112,6 @@ public class Invoice {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public Receipt getRecp() {
-        return recp;
-    }
-
-    public void setRecp(Receipt recp) {
-        this.recp = recp;
     }
 
     public LocalDateTime getUpdateDate() {
