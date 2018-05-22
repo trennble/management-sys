@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ServiceResult save(User user) {
+    public ServiceResult save(@RequestBody User user) {
         return ServiceResult.success(userService.save(user));
     }
 
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ServiceResult update(User user) {
+    public ServiceResult update(@RequestBody User user) {
         return ServiceResult.success(userService.update(user));
     }
 

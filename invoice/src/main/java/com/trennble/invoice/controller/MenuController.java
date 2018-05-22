@@ -18,7 +18,7 @@ public class MenuController {
     private MenuService menuService;
 
     @PostMapping
-    public ServiceResult save(Menu menu) {
+    public ServiceResult save(@RequestBody Menu menu) {
         return ServiceResult.success(menuService.save(menu));
     }
 
@@ -29,7 +29,7 @@ public class MenuController {
     }
 
     @PutMapping
-    public ServiceResult update(Menu menu) {
+    public ServiceResult update(@RequestBody Menu menu) {
         return ServiceResult.success(menuService.update(menu));
     }
 

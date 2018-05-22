@@ -23,6 +23,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public Invoice update(Invoice invoice) {
+        Invoice one = invoiceRepo.findOne(invoice.getId());
+        invoice.setCreateDate(one.getCreateDate());
         return invoiceRepo.save(invoice);
     }
 

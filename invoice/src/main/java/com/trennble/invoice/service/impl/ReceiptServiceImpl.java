@@ -23,7 +23,10 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public Receipt update(Receipt receipt) {
-        return receiptRepo.save(receipt);
+        Receipt one = receiptRepo.findOne(receipt.getId());
+        one.setName(receipt.getName());
+        one.setRemark(receipt.getName());
+        return receiptRepo.save(one);
     }
 
     @Override

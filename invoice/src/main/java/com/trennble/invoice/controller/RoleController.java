@@ -18,7 +18,7 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping
-    public ServiceResult save(Role role) {
+    public ServiceResult save(@RequestBody Role role) {
         return ServiceResult.success(roleService.save(role));
     }
 
@@ -31,7 +31,7 @@ public class RoleController {
     }
 
     @PutMapping
-    public ServiceResult update(Role role) {
+    public ServiceResult update(@RequestBody Role role) {
         return ServiceResult.success(roleService.update(role));
     }
 

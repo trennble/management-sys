@@ -2,6 +2,7 @@ package com.trennble.invoice.entity;
 
 
 import com.trennble.auth.entity.User;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,9 +11,18 @@ import java.util.List;
 @Entity(name = "receipt")
 public class Receipt {
 
+
+    public enum Status{
+        created,commit,success,fail
+    }
+
     @Id
     @GeneratedValue
     private Integer id;
+
+    @ApiModelProperty(hidden = true)
+    @Enumerated(EnumType.STRING)
+    private Invoice.Status status;
 
     private String name;
 
