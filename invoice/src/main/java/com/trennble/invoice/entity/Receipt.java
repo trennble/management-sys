@@ -28,6 +28,9 @@ public class Receipt {
 
     private String remark;
 
+    @Column(name="owner_id")
+    private Integer userId;
+
     @ManyToOne
     private User owner;
 
@@ -37,6 +40,14 @@ public class Receipt {
     private LocalDateTime updateDate;
 
     private LocalDateTime createDate;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return id;

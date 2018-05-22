@@ -4,6 +4,7 @@ import com.trennble.invoice.entity.Receipt;
 import com.trennble.invoice.repo.ReceiptRepo;
 import com.trennble.invoice.service.ReceiptService;
 import com.trennble.invoice.util.PageData;
+import com.trennble.invoice.util.ServiceUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public Receipt add(Receipt receipt) {
+        Integer userId = ServiceUtil.getUserId();
+        receipt.setUserId(userId);
         return receiptRepo.save(receipt);
     }
 
@@ -36,13 +39,13 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     @Override
     public PageData<Receipt> list(int page, int limit, Receipt.Status status) {
+        Integer userId = ServiceUtil.getUserId();
         Page<Receipt> data;
         PageRequest pageable = new PageRequest(page, limit);
         if (status != null) {
-            data = receiptRepo.findByStatus(status, pageable);
+            data = receiptRepo.findByStatusAndUserId(status, userId, pageable);
         } else {
-
-            data = receiptRepo.findAll(pageable);
+            data = receiptRepo.findByUserId(userId,pageable);
         }
         return new PageData<>(data.getContent(), data.getTotalElements());
     }

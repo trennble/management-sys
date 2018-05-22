@@ -7,5 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface ReceiptRepo extends PagingAndSortingRepository<Receipt, Integer> {
 
-    Page<Receipt> findByStatus(Receipt.Status status, Pageable page);
+    Page<Receipt> findByStatusAndUserId(Receipt.Status status, Integer userId, Pageable page);
+
+    Page<Receipt> findByUserId(Integer userId, Pageable page);
 }

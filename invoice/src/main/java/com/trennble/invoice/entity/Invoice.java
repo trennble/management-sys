@@ -33,6 +33,10 @@ public class Invoice {
     private LocalDateTime updateDate;
     @ApiModelProperty(hidden = true)
     private LocalDateTime createDate;
+    @Column(name="owner_id")
+    private Integer userId;
+    @Column(name = "recp_id")
+    private Integer recpId;
 
     @ApiModelProperty(value = "发票代码",required = true)
     private String invoiceCode;
@@ -70,9 +74,12 @@ public class Invoice {
         }
     }
 
-    public static void main(String[] args) {
-        InvoiceVo invoiceVo = new InvoiceVo();
-        new Invoice(invoiceVo);
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getId() {
@@ -217,5 +224,13 @@ public class Invoice {
 
     public void setSellerCode(String sellerCode) {
         this.sellerCode = sellerCode;
+    }
+
+    public Integer getRecpId() {
+        return recpId;
+    }
+
+    public void setRecpId(Integer recpId) {
+        this.recpId = recpId;
     }
 }
