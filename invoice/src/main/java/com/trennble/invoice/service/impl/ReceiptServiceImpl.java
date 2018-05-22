@@ -35,13 +35,44 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public PageData<Receipt> list(int page, int limit) {
-        Page<Receipt> data = receiptRepo.findAll(new PageRequest(page, limit));
-        return new PageData<>(data.getContent(),data.getTotalElements());
+    public PageData<Receipt> list(int page, int limit, Receipt.Status status) {
+        Page<Receipt> data;
+        PageRequest pageable = new PageRequest(page, limit);
+        if (status != null) {
+            data = receiptRepo.findByStatus(status, pageable);
+        } else {
+
+            data = receiptRepo.findAll(pageable);
+        }
+        return new PageData<>(data.getContent(), data.getTotalElements());
     }
 
     @Override
     public void delete(Integer id) {
         receiptRepo.delete(id);
+    }
+
+    @Override
+    public boolean fail(Integer id) {
+        Receipt one = receiptRepo.findOne(id);
+        one.setStatus(Receipt.Status.fail);
+        receiptRepo.save(one);
+        return true;
+    }
+
+    @Override
+    public boolean success(Integer id) {
+        Receipt one = receiptRepo.findOne(id);
+        one.setStatus(Receipt.Status.success);
+        receiptRepo.save(one);
+        return true;
+    }
+
+    @Override
+    public boolean commit(Integer id) {
+        Receipt one = receiptRepo.findOne(id);
+        one.setStatus(Receipt.Status.commit);
+        receiptRepo.save(one);
+        return true;
     }
 }

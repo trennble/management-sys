@@ -47,5 +47,23 @@ public class ReceiptController {
         receiptService.delete(id);
         return ServiceResult.success(true);
     }
+    @PutMapping("commit")
+    @ApiOperation("删除报销单")
+    ServiceResult commit(Integer id){
+        receiptService.commit(id);
+        return ServiceResult.success(true);
+    }
+    @DeleteMapping("success")
+    @ApiOperation("删除报销单")
+    ServiceResult success(Integer id){
+        receiptService.success(id);
+        return ServiceResult.success(true);
+    }
+    @DeleteMapping("fail")
+    @ApiOperation("删除报销单")
+    ServiceResult fail(Integer id){
+        receiptService.fail(id);
+        return ServiceResult.success(true);
+    }
 
 }

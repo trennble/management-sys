@@ -11,7 +11,14 @@ public interface ReceiptService {
 
     Receipt fetch(int id);
 
-    PageData<Receipt> list(int page, int limit);
+    PageData<Receipt> list(int page, int limit,Receipt.Status status);
 
     void delete(Integer id);
+
+    boolean fail(Integer id);
+
+    boolean success(Integer id);
+
+    boolean commit(Integer id);
+
 }

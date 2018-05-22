@@ -22,7 +22,7 @@ public class Receipt {
 
     @ApiModelProperty(hidden = true)
     @Enumerated(EnumType.STRING)
-    private Invoice.Status status;
+    private Status status;
 
     private String name;
 
@@ -92,5 +92,13 @@ public class Receipt {
 
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
