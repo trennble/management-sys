@@ -17,5 +17,5 @@ public interface InvoiceService {
 
     void delete(Integer id);
 
-    List<Invoice> validInvoice();
+    List<Invoice> validInvoice(Integer receiptId);
 }

@@ -1,11 +1,11 @@
 package com.trennble.invoice.service.impl;
 
+import com.google.common.collect.Lists;
 import com.trennble.invoice.entity.Invoice;
 import com.trennble.invoice.repo.InvoiceRepo;
 import com.trennble.invoice.rpc.UserRpc;
 import com.trennble.invoice.service.InvoiceService;
 import com.trennble.invoice.util.PageData;
-import com.trennble.invoice.util.ServiceUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -50,8 +52,19 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<Invoice> validInvoice() {
-        return invoiceRepo.findValid();
+    public List<Invoice> validInvoice(Integer receiptId) {
+        // 找出没被添加的或者被添加到当前报销单的发票
+        List<Invoice> valid = invoiceRepo.findValid(receiptId).stream()
+                .peek(item -> item.setStatus(Invoice.Status.valid)).collect(toList());
+        List<Integer> validIds = valid.stream().map(Invoice::getId).collect(toList());
+
+        //获取所有数据，然后理由有效数据把没效数据给标记
+        List<Invoice> inValid = Lists.newArrayList(invoiceRepo.findAll()).stream()
+                .filter(item -> !validIds.contains(item.getId()))
+                .peek(item -> item.setStatus(Invoice.Status.invalid)).collect(toList());
+
+        valid.addAll(inValid);
+        return valid;
     }
 
     @Override

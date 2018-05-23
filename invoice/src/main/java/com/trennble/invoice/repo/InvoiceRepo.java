@@ -12,7 +12,7 @@ public interface InvoiceRepo extends PagingAndSortingRepository<Invoice, Integer
 
     Page<Invoice> findByUserId(Integer userId, Pageable page);
 
-    @Query(value = "SELECT * FROM invoice i WHERE NOT exists(SELECT 0 FROM receipt_invoices ri WHERE ri.invoices_id=i.id)",
+    @Query(value = "SELECT * FROM invoice i WHERE NOT exists(SELECT 0 FROM receipt_invoices ri WHERE ri.invoices_id = i.id AND ri.receipt_id<>?1)",
             nativeQuery = true)
-    List<Invoice> findValid();
+    List<Invoice> findValid(Integer receiptId);
 }

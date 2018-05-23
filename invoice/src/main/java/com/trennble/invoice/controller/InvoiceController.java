@@ -41,10 +41,14 @@ public class InvoiceController {
         return ServiceResult.success(invoiceService.list(page,limit));
     }
 
+    /**
+     * 被添加到其他报销单中的为invalid，没被添加的或者被添加到当前报销单的为valid
+     * @return
+     */
     @GetMapping("valid")
-    @ApiOperation("获取没被添加到报销单的发票")
-    ServiceResult validInvoice(){
-        return ServiceResult.success(invoiceService.validInvoice());
+    @ApiOperation("获取所有发票发票，但是加以区分")
+    ServiceResult validInvoice(Integer receiptId){
+        return ServiceResult.success(invoiceService.validInvoice(receiptId));
     }
 
     @DeleteMapping
