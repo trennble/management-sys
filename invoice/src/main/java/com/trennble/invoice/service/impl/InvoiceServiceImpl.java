@@ -53,13 +53,15 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     @Override
     public List<Invoice> validInvoice(Integer receiptId) {
+        Integer userId = (Integer) ((HashMap) userRpc.user().get("principal")).get("id");
+
         // 找出没被添加的或者被添加到当前报销单的发票
-        List<Invoice> valid = invoiceRepo.findValid(receiptId).stream()
+        List<Invoice> valid = invoiceRepo.findValid(receiptId, userId).stream()
                 .peek(item -> item.setStatus(Invoice.Status.valid)).collect(toList());
         List<Integer> validIds = valid.stream().map(Invoice::getId).collect(toList());
 
         //获取所有数据，然后理由有效数据把没效数据给标记
-        List<Invoice> inValid = Lists.newArrayList(invoiceRepo.findAll()).stream()
+        List<Invoice> inValid = Lists.newArrayList(invoiceRepo.findAllByUserId(userId)).stream()
                 .filter(item -> !validIds.contains(item.getId()))
                 .peek(item -> item.setStatus(Invoice.Status.invalid)).collect(toList());
 
