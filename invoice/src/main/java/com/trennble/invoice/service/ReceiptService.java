@@ -23,4 +23,7 @@ public interface ReceiptService {
 
     boolean commit(List<Integer> ids);
 
+    List<Receipt> all(Receipt.Status status);
+
+    boolean setReceiptInvoice(Integer receiptId, List<Integer> invoiceIds);
 }

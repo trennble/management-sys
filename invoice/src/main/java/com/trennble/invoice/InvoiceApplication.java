@@ -19,9 +19,9 @@ import java.util.Enumeration;
 @SpringCloudApplication
 @EnableFeignClients
 // @EnableRedisHttpSession
-@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class,ManagementWebSecurityAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class})
 @EnableJpaRepositories("com.trennble.invoice.repo")
-@EntityScan({"com.trennble.invoice.entity","com.trennble.auth.entity"})
+@EntityScan({"com.trennble.invoice.entity", "com.trennble.auth.entity"})
 public class InvoiceApplication {
 
     public static void main(String[] args) {
@@ -30,6 +30,7 @@ public class InvoiceApplication {
 
     /**
      * 请求头传递
+     *
      * @return
      */
     @Bean

@@ -38,7 +38,9 @@ public class Receipt {
     // private User owner;
 
     @OneToMany(targetEntity = Invoice.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "recp_id", referencedColumnName = "id")
+    @JoinTable(name = "receipt_invoices",
+            joinColumns = @JoinColumn(name = "receipt_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "invoices_id", referencedColumnName = "id"))
     private List<Invoice> invoices;
 
     private LocalDateTime updateDate;

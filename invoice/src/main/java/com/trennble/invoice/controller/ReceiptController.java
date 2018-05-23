@@ -43,6 +43,12 @@ public class ReceiptController {
         return ServiceResult.success(receiptService.list(page, limit, status));
     }
 
+    @GetMapping("all")
+    @ApiOperation("获取所有报销单列表")
+    ServiceResult all(Receipt.Status status) {
+        return ServiceResult.success(receiptService.all(status));
+    }
+
     @DeleteMapping
     @ApiOperation("删除报销单")
     ServiceResult delete(Integer id) {
@@ -71,8 +77,11 @@ public class ReceiptController {
         return new ServiceResult(state);
     }
 
-    // ServiceResult verifyList(int page,int limit){
-    //
-    // }
+    @PutMapping("users")
+    @ApiOperation("为当前报销单设置发票")
+    public ServiceResult setRoleUser(Integer receiptId,@RequestBody List<Integer> invoiceIds){
+        receiptService.setReceiptInvoice(receiptId,invoiceIds);
+        return ServiceResult.success(true);
+    }
 
 }
