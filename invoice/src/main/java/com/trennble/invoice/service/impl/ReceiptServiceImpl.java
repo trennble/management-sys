@@ -41,7 +41,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     public Receipt update(Receipt receipt) {
         Receipt one = receiptRepo.findOne(receipt.getId());
         one.setName(receipt.getName());
-        one.setRemark(receipt.getName());
+        one.setRemark(receipt.getRemark());
         return receiptRepo.save(one);
     }
 
