@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -44,8 +45,13 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public PageData<Invoice> list(int page, int limit) {
         Integer userId = (Integer) ((HashMap) userRpc.user().get("principal")).get("id");
-        Page<Invoice> data = invoiceRepo.findByUserId(userId,new PageRequest(page, limit));
-        return new PageData<>(data.getContent(),data.getTotalElements());
+        Page<Invoice> data = invoiceRepo.findByUserId(userId, new PageRequest(page, limit));
+        return new PageData<>(data.getContent(), data.getTotalElements());
+    }
+
+    @Override
+    public List<Invoice> validInvoice() {
+        return invoiceRepo.findValid();
     }
 
     @Override

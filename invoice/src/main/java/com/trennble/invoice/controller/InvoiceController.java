@@ -41,6 +41,12 @@ public class InvoiceController {
         return ServiceResult.success(invoiceService.list(page,limit));
     }
 
+    @GetMapping("valid")
+    @ApiOperation("获取没被添加到报销单的发票")
+    ServiceResult validInvoice(){
+        return ServiceResult.success(invoiceService.validInvoice());
+    }
+
     @DeleteMapping
     @ApiOperation("删除发票")
     ServiceResult<String> delete(Integer id){
