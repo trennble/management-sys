@@ -77,7 +77,7 @@ public class ReceiptController {
         return new ServiceResult(state);
     }
 
-    @PutMapping("users")
+    @PutMapping("invoices")
     @ApiOperation("为当前报销单设置发票")
     public ServiceResult setRoleUser(Integer receiptId,@RequestBody List<Integer> invoiceIds){
         receiptService.setReceiptInvoice(receiptId,invoiceIds);
