@@ -99,13 +99,18 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public List<Receipt> all(Receipt.Status status) {
+    public List<Receipt> curAll(Receipt.Status status) {
         Integer userId = (Integer) ((HashMap) userRpc.user().get("principal")).get("id");
         if (status != null) {
             return receiptRepo.findByStatusAndUserId(status, userId);
         } else {
             return receiptRepo.findByUserId(userId);
         }
+    }
+
+    @Override
+    public List<Receipt> all() {
+        return receiptRepo.findByStatus(Receipt.Status.commit);
     }
 
     @Override
@@ -127,4 +132,5 @@ public class ReceiptServiceImpl implements ReceiptService {
         template.batchUpdate(sql, args);
         return false;
     }
+
 }

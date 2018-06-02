@@ -13,6 +13,8 @@ public interface ReceiptRepo extends PagingAndSortingRepository<Receipt, Integer
 
     List<Receipt> findByStatusAndUserId(Receipt.Status status, Integer userId);
 
+    List<Receipt> findByStatus(Receipt.Status status);
+
     Page<Receipt> findByUserId(Integer userId, Pageable page);
 
     List<Receipt> findByUserId(Integer userId);

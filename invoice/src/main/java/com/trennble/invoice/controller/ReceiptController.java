@@ -43,10 +43,16 @@ public class ReceiptController {
         return ServiceResult.success(receiptService.list(page, limit, status));
     }
 
+    @GetMapping("curAll")
+    @ApiOperation("获取当前所有报销单列表")
+    ServiceResult curAll(Receipt.Status status) {
+        return ServiceResult.success(receiptService.curAll(status));
+    }
+
     @GetMapping("all")
-    @ApiOperation("获取所有报销单列表")
-    ServiceResult all(Receipt.Status status) {
-        return ServiceResult.success(receiptService.all(status));
+    @ApiOperation("获取所有提交报销单列表")
+    ServiceResult all() {
+        return ServiceResult.success(receiptService.all());
     }
 
     @DeleteMapping
