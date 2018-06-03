@@ -32,6 +32,16 @@ public class UserController {
         return ServiceResult.success(userService.update(user));
     }
 
+    @PutMapping("resetPasswd")
+    public ServiceResult resetPasswd(String old, String last) {
+        try {
+            userService.resetPasswd(old,last);
+        } catch (Exception e) {
+            return ServiceResult.fail(e.getMessage());
+        }
+        return ServiceResult.success(true);
+    }
+
     @GetMapping
     public ServiceResult fetch(Integer id) {
         return ServiceResult.success(userService.fetch(id));

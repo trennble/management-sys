@@ -21,4 +21,5 @@ public interface UserService {
 
     List<User> all();
 
+    void resetPasswd(String old, String last) throws Exception;
 }
